@@ -1,0 +1,54 @@
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Restaurant List</h2>
+    </div>
+    <nav class="navbar">
+      <input class="form-control" type="text" name="searchlist" [(ngModel)]="searchlist"  
+      placeholder="Enter to search">      
+    </nav>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>OpenTime</th>
+            <th>CloseTime</th>
+            <th>Last Updated Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rest of restaurant | filter:searchlist | paginate: { itemsPerPage: 5, currentPage: p };">
+            
+            <td>{{rest.name}}</td>
+            <td>{{rest.address}}</td>
+            <td>{{rest.phone}}</td>
+            <td>{{rest.opentime}}</td>
+            <td>{{rest.closetime}}</td>
+            <td>{{rest.lastupdatedtime}}</td>
+            <td>
+              
+              <button (click)="deleteRestaurant(rest.id)" class="btn btn-danger">Delete</button>
+              <button (click)="editRestaurant(rest.id)" class="btn btn-info" style="margin-left: 10px">Edit</button>
+              <button (click)="restaurantDetails(rest.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+              
+              <span *ngIf=!rest.isactivated>
+                <button (click)="ChangeButton(rest.id)" class="btn btn-info" style="margin-left: 10px">Activate</button>
+              </span>
+              <span *ngIf=rest.isactivated>
+                <button (click)="ChangeButton(rest.id)" class="btn btn-info" style="margin-left: 10px">Deactivate</button>
+              </span>
+              </td> 
+          </tr>
+        </tbody>
+        <div style="text-align: center;">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        
+      </table>
+    </div>
+  </div>

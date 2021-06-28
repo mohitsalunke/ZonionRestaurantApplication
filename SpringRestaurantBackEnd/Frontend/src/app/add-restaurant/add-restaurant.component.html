@@ -1,0 +1,97 @@
+<div class="container text-center">
+    <div>
+        <h1>Add Restaurant</h1>
+    </div>
+    <form #RestaurantForm="ngForm" style="max-width: 600px; margin: 0 auto;" (ngSubmit)="addForm(RestaurantForm.value)">
+        <div class="m-3">
+            <div class="form-group">
+                <label for="name" class="col-4 col-form-label" style="font-size:120%">Name</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="Restaurant.name" required
+                    pattern="[A-Za-z0-9]+">
+            </div>
+            <div *ngIf="!RestaurantForm.controls.name?.valid && (RestaurantForm.controls.name?.dirty ||RestaurantForm.controls.name?.touched)"
+                class="alert alert-danger">
+                <div [hidden]="!RestaurantForm.controls.name.errors?.required">
+                    name is required
+                </div>
+                <div [hidden]="!RestaurantForm.controls.name.errors?.pattern">
+                    name should be valid, only alphabets and numbers
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address" class="col-4 col-form-label" style="font-size:120%">Address</label>
+                <textarea type="text" class="form-control" name="address" [(ngModel)]="Restaurant.address" rows="3"
+                    cols="33"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="col-4 col-form-label" style="font-size:120%">Phone</label>
+                <input type="text" class="form-control" name="phone" [(ngModel)]="Restaurant.phone" required
+                    pattern="[7-9]{1}[0-9]{9}">
+            </div>
+            <div *ngIf="!RestaurantForm.controls.phone?.valid && (RestaurantForm.controls.phone?.dirty ||RestaurantForm.controls.phone?.touched)"
+                class="alert alert-danger">
+                <div [hidden]="!RestaurantForm.controls.phone.errors?.required">
+                    phone number is required
+                </div>
+                <div [hidden]="!RestaurantForm.controls.phone.errors?.pattern">
+                    phone number should start with 7-8-9
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="opentime" class="col-4 col-form-label" style="font-size:120%">Choose a Open Time:</label>
+
+                <input type="time" id="opentime" name="opentime" min="09:00" max="18:00"
+                    [(ngModel)]="Restaurant.opentime" required>
+
+
+            </div>
+            <div class="form-group">
+                <label for="closetime" class="col-4 col-form-label" style="font-size:120%">Choose a Close Time:</label>
+
+                <input type="time" id="closetime" name="closetime" min="09:00" max="18:00"
+                    [(ngModel)]="Restaurant.closetime" required>
+
+
+            </div>
+            <div class="form-group">
+                <button type="submit">SubmitDetails</button>
+            </div>
+            <div class="form-group">
+                <button (click)="RestaurantForm.resetForm()">Reset</button>
+            </div>
+        </div>
+    </form>
+    <form (ngSubmit)="addRestaurantMenuImage()">
+        <div class="form-group">
+            <label for="active"><span style="color: red;">*</span>Restaurant Menu :-</label>
+            <div class="container row">
+                <div class="col-md-12">
+                    <h1>Upload Menu</h1>
+                    <h4><small class="text-primary">Choose only png , jpg , jpeg image types</small>
+                    </h4>
+                </div>
+            </div>
+            <hr>
+            <div class="container row">
+                <div class="col-md-12">
+                    <div *ngIf=message>{{message}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="container row" >
+            <div class="col-md-6"style="margin-left: 22%; margin-bottom: 20px;">
+                <input type="file" accept="image/*" (change)="imageChange($event)" multiple="false" name="name"
+                    height="200">
+            </div>
+            <div class="col-md-6" style=" margin-left:40%; margin-top: -47px; margin-bottom: 20px;">
+                <input type="submit" value="upload">
+            </div>
+            
+        </div>
+    </form>
+
+
+</div>

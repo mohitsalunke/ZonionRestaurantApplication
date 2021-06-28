@@ -1,0 +1,27 @@
+
+
+<hr/>
+<div *ngIf="restaurant">
+  <div>
+    <label><b>Name: </b></label> {{restaurant.name}}
+  </div>
+  <div>
+    <label><b>Address: </b></label> {{restaurant.address}}
+  </div>
+  <div>
+    <label><b>Phone: </b></label> {{restaurant.phone}}
+  </div> 
+  <div>
+    <label><b>OpenTime: </b></label> {{restaurant.opentime}}
+  </div>
+  <div>
+    <label><b>CloseTime: </b></label> {{restaurant.closetime}}
+  </div>
+  <div>
+    <label><b>Menu: </b></label><br>
+    <img [src]="imagePath" style="height: 350px; width: 350px;"></div>
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Home</button><br>

@@ -1,0 +1,64 @@
+<div class="container text-center">
+    <div>
+      <h1>Edit Restaurant</h1>
+  </div>
+    <form #RestaurantForm="ngForm" style="max-width: 600px; margin: 0 auto;" (ngSubmit)="updateRestaurant()">
+      <div class="m-3">
+      <div class="form-group">
+          <label for="name" class="col-4 col-form-label" style="font-size:120%">Name</label>
+          <input type="text" class="form-control" name="name" 
+          [(ngModel)]="restaurant.name" required pattern="[A-Za-z0-9]+">
+      </div>
+      <div *ngIf="!RestaurantForm.controls.name?.valid && (RestaurantForm.controls.name?.dirty ||RestaurantForm.controls.name?.touched)"
+           class="alert alert-danger">
+         <div [hidden]="!RestaurantForm.controls.name.errors?.required">
+          name is required
+         </div>
+         <div [hidden]="!RestaurantForm.controls.name.errors?.pattern">
+          name should be valid, only alphabets and numbers
+         </div>
+      </div>
+  
+      <div class="form-group" >
+          <label for="address" class="col-4 col-form-label" style="font-size:120%">Address</label>
+          <textarea type="text" class="form-control" name="address" 
+          [(ngModel)]="restaurant.address" rows="5" cols="33"></textarea>
+      </div> 
+      
+      <div class="form-group">
+          <label for="phone" class="col-4 col-form-label" style="font-size:120%">Phone</label>
+          <input type="text" class="form-control" name="phone" 
+          [(ngModel)]="restaurant.phone" required pattern="[7-9]{1}[0-9]{9}">
+      </div>
+      <div *ngIf="!RestaurantForm.controls.phone?.valid && (RestaurantForm.controls.phone?.dirty ||RestaurantForm.controls.phone?.touched)"
+               class="alert alert-danger">
+          <div [hidden]="!RestaurantForm.controls.phone.errors?.required">
+               phone number is required
+          </div>
+          <div [hidden]="!RestaurantForm.controls.phone.errors?.pattern">
+               phone number should start with 7-8-9
+          </div>
+      </div>
+     
+      <div class="form-group">
+          <label for="opentime" class="col-4 col-form-label" style="font-size:120%">Choose a Open Time:</label>
+      
+            <input type="time" id="opentime" name="opentime"
+             min="09:00" max="18:00" [(ngModel)]="restaurant.opentime" required>
+      
+             
+      </div>
+      <div class="form-group">
+          <label for="closetime" class="col-4 col-form-label" style="font-size:120%">Choose a Close Time:</label>
+      
+            <input type="time" id="closetime" name="closetime"
+             min="09:00" max="18:00" [(ngModel)]="restaurant.closetime" required>
+      
+             
+      </div>
+      <div class="form-group">
+          <button type="submit">Update</button>
+      </div>
+  </div>
+   </form>
+  </div>
